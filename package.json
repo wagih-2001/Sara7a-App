@@ -1,0 +1,19 @@
+{
+  "name": "sara7aapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": " ",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "gitignore": "^0.7.0",
+    "mongoose": "^9.7.0"
+  }
+}
