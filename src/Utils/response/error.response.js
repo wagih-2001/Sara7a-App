@@ -1,14 +1,28 @@
+// export const ErrorResponse = ({
+//   message = ' Error',
+//   statusCode = 500,
+//   extra = undefined
+// }) => {
+//   const error = new Error(
+//     typeof message === 'string' ? message : message?.message
+//   );
+//   error.statusCode = statusCode;
+//   error.extra = extra;
+//   throw error;
+// };
 export const ErrorResponse = ({
-  message = ' Error',
+  message = 'Error',
   statusCode = 500,
   extra = undefined
 }) => {
   const error = new Error(
     typeof message === 'string' ? message : message?.message
   );
+
   error.statusCode = statusCode;
   error.extra = extra;
-  throw error;
+
+  return error;
 };
 
 export const NotFoundErrorException = (
