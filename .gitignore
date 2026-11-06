@@ -1,2 +1,18 @@
-node_modules
+# Dependencies
+node_modules/
+
+# Environment Variables
 .env
+.env.*
+config/*.env
+
+# Uploaded Files
+src/uploads/
+
+# Logs
+logs/
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db

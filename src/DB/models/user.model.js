@@ -2,8 +2,38 @@ import mongoose from 'mongoose';
 import {
   GenderEnum,
   ProviderEnum,
-  RoleEnum
+  RoleEnum,
 } from '../../Utils/enums/user.enums.js';
+import { OTPEnum } from '../../Utils/enums/otp.enums.js';
+
+// OTP Schema
+const otpSchema = new mongoose.Schema(
+  {
+    code: {
+      type: String,
+      required: true,
+      select: false
+    },
+    type: {
+      type: String,
+      enum: Object.values(OTPEnum),
+      required: true
+    },
+    expiresIn: {
+      type: Date,
+      required: true
+    },
+    attempts: {
+      type: Number,
+      default: 0
+    }
+  },
+  {
+    _id: false
+  }
+);
+
+// User Schema
 const userSchema = new mongoose.Schema(
   {
     firstName: {
@@ -43,29 +73,42 @@ const userSchema = new mongoose.Schema(
     role: {
       type: Number,
       enum: Object.values(RoleEnum),
-      default: RoleEnum.USER
+      default: RoleEnum.User
     },
     provider: {
       type: Number,
       enum: Object.values(ProviderEnum),
       default: ProviderEnum.SYSTEM
     },
-    confirmEmail: Date,
-    profilepic: String
-  },
 
-  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
+    // OTP
+    otp: {
+      type: [otpSchema],
+      default: []
+    },
+
+    confirmEmail: Date,
+    profilepic: String,
+    coverpic: [String]
+  },
+  {
+    timestamps: true,
+    toObject: { virtuals: true },
+    toJSON: {
+      virtuals: true,
+      transform: (_doc, ret) => {
+        delete ret.password;
+        delete ret.otp;
+        return ret;
+      }
+    }
+  }
 );
 
-userSchema
-  .virtual('username')
-  .set(function (value) {
-    const [firstName, lastName] = value.split(' ');
-    this.set({ firstName, lastName });
-  })
-  .get(function () {
-    return `${this.firstName} ${this.lastName}`;
-  });
+userSchema.virtual('username').get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
 const UserModel = mongoose.model('User', userSchema);
 
 export default UserModel;

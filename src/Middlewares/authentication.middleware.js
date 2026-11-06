@@ -47,7 +47,7 @@ export const decodedToken = async ({
   return [user, decoded];
 };
 
-export const authentication = ({ tokenType = TokenTypeEnum.Access }) => {
+export const authentication = ({ tokenType = TokenTypeEnum.Access } = {}) => {
   return async (req, res, next) => {
     const [user, decoded] =
       (await decodedToken({

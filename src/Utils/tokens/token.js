@@ -51,6 +51,7 @@ export const getNewLoginCredentials = async user => {
           : Number(ACCESS_TOKEN_ADMIN_EXPIRES_In)
     }
   });
+
   const refreshToken = generateToken({
     payload: { id: user._id },
     secreKey: signature.refreshSignature,

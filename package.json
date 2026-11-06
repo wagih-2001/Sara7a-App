@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch index.js"
+    "dev": "node --use-system-ca --watch index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +13,16 @@
   "dependencies": {
     "argon2": "^0.44.0",
     "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.7.3",
     "gitignore": "^0.7.0",
+    "joi": "^18.2.3",
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.3.0",
-    "mongoose": "^9.7.0"
+    "mongoose": "^9.7.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^10.3.1"
   }
 }
